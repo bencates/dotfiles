@@ -1,0 +1,57 @@
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+
+" Prevent the cursor from moving to the edge of the window
+set scrolloff=5
+
+set statusline=%M:%f\ %Y\ %r%h%w%=Line:%l/%L[%p%%]\ Col:%c%V\ Buf:#%n\ %{fugitive#statusline()}
+
+" Shortcut to rapidly toggle `set list`
+set nolist
+nmap <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Turn line highlighting on for the active window
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
+" Emulate TextMate indent and outdent commands
+"nmap <D-[> <<
+"nmap <D-]> >>
+"vmap <D-[> <gv
+"vmap <D-]> >gv
+
+" Enable more reasonable shortcuts for swapping windows
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Shortcut to clear search highlighting
+map <leader>x :nohlsearch<CR>
+
+" Set defaults for NERDCommenter
+let NERDSpaceDelims=1
+
+" Smart line numbering
+set relativenumber
+
+" Treat .cap like .rake
+autocmd BufNew,BufEnter *.cap set ft=ruby
+
+" Allow language specific indentation
+filetype plugin indent on
+
+" Autoformat go files
+autocmd BufWritePre *.go Fmt
+
+" Treat .handlebars.erb as a handlebars file
+au BufNewFile,BufRead *.handlebars.erb set filetype=html syntax=mustache
+
+
+" Simplenote
+let g:SimplenoteUsername = "ben.cates@gmail.com"
+let g:SimplenotePassword = "andyrusty"
