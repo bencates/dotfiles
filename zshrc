@@ -86,9 +86,5 @@ alias serve="python -m SimpleHTTPServer"
 # Adds Elastic Beanstalk `eb` command
 export PATH=$PATH:$HOME/.eb_command/eb/linux/python2.7
 
-# Sets AWS global variables
-export AWS_ACCESS_KEY_ID="AKIAJWZQFZLDQ6LAZ4DA"
-export AWS_SECRET_ACCESS_KEY="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"
-
 # Adds the Ideum master key to the SSH keychain
 ssh-add ~/.ec2/ideumwest.pem 2> /dev/null
