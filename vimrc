@@ -9,14 +9,12 @@ set backspace=indent,eol,start
 syntax on
 
 " Set up vundle
-filetype off                   " required!
+filetype off " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/vundle'
+" let Vundle manage Vundle, required 
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 "
@@ -33,7 +31,8 @@ Plugin 'jnwhiteh/vim-golang'
 " Themes
 Plugin 'altercation/vim-colors-solarized'
 
-filetype plugin indent on     " required!
+call vundle#end()
+filetype plugin indent on " required
 
 " Automatically pick up vimrc changes on write
 autocmd! BufWritePost .vimrc source %
