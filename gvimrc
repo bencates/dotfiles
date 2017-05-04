@@ -1,8 +1,7 @@
+colorscheme base16-default-dark
 set background=dark
-color solarized
 
-map <D-S-[> gT
-map <D-S-[> gt
-
-" Remove the toolbar
+set guioptions-=m
 set guioptions-=T
+
+set guifont=Monospace\ 12
