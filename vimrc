@@ -1,65 +1,91 @@
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Use Vim extensions; must be first thing in file
 set nocompatible
 
-" Make backspace behave in a sane manner.
-set backspace=indent,eol,start
+" Use a POSIX compliant shell
+set shell=/bin/bash
 
-" Switch syntax highlighting on
-syntax on
-
-" Set up vundle
-filetype off " required
+" BEGIN Vundle setup
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required 
+" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundles here:
-"
 " Plugins
 Plugin 'kien/ctrlp.vim'
+Plugin 'ddollar/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-rails'
+Plugin 'godlygeek/tabular'
+Plugin 'drmikehenry/vim-fontsize'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
+Plugin 'bronson/vim-trailing-whitespace'
+" Plugin 'Valloric/YouCompleteMe' " https://github.com/Valloric/YouCompleteMe#installation
+Plugin 'mileszs/ack.vim'
 
-" Language support
-Plugin 'nono/vim-handlebars'
-Plugin 'jnwhiteh/vim-golang'
+" Languages and Frameworks
+Plugin 'tpope/vim-rails'         " Ruby/Rails
+Plugin 'spf13/PIV'               " PHP
+Plugin 'fatih/vim-go'            " Go
+Plugin 'evidens/vim-twig'        " Twig
+Plugin 'juvenn/mustache.vim'     " Mustache
+Plugin 'elixir-lang/vim-elixir'  " Elixir
+Plugin 'pangloss/vim-javascript' " JavaScript
+Plugin 'posva/vim-vue'           " Vue
 
 " Themes
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
-filetype plugin indent on " required
+filetype plugin indent on
+" END Vundle setup
 
-" Automatically pick up vimrc changes on write
-autocmd! BufWritePost .vimrc source %
-autocmd! BufWritePost .gvimrc source %
 
-" Searching
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-nnoremap <leader>x :nohl<CR>
 
-" Window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Sane window change shortcuts
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
-" Line numbering
-set number
+" Force a few lines above and below the cursor
+set scrolloff=4
+
+" Smart relative numbering
 set relativenumber
+set number
 
-" Tab settings
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
+" Highlight the right column
+execute "set colorcolumn=" . join(range(81,512), ',')
+
+" Shortcut to clear highlighting
+nnoremap <leader>x noh
+
+" Space for code folding
+nnoremap <space> za
+vnoremap <space> zf
+
+" 2-space tabs
+set shiftwidth=2 tabstop=2 softtabstop=2 smarttab expandtab
 
 " NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<cr>
+
+" Show whitespace characters
+set listchars=tab:├─
+nnoremap <leader>l :set invlist<cr>
+
+" Shortcut to fix trailing whitespace
+nnoremap <leader>s :%s/\s\+$<cr>
+
+
+
+" PHP Plugin config
+let php_sync_method=0
+
+" Use silver searcher instead of ack when available
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
